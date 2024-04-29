@@ -1,0 +1,35 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+}
+
+.content-container {
+    max-width: 600px; /* Set maximum width for the content container */
+    margin: 0 auto; /* Center the content container horizontally */
+}
+
+h1 {
+    margin-top: 50px;
+    margin-bottom: 30px  ;
+}
+
+form {
+    margin-bottom: 30px;
+}
+
+#image-container {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+#image-container img {
+    width: 40%;
+    height: auto; 
+    border: 1px solid #000;
+    box-sizing: border-box;
+}
+
+#prediction-result {
+    margin-top: 20px;
+}
+
