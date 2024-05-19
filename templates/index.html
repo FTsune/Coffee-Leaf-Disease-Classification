@@ -1,24 +1,105 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Coffee Leaf Disease Classification</title>
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Coffee Leaf Disease Classification</title>
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+  <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='images/icon.png') }}">
 </head>
 <body>
-    <div class="content-container">
-        <h1><b>BARAKO - BAMA</b></h1>
-        <form id="upload-form" enctype="multipart/form-data">
-            <input type="file" id="image-input" accept="image/*" required>  
-            <button type="submit">Upload Image</button>
-        </form>
-        <div id="image-container"></div>
-        <div id="prediction-result"></div>
+  
+  <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Logo">
+  
+    <div class="navbar">
+        <div class="container">
+            <a class="nav-link" href="#test">TEST</a>
+            <a class="nav-link" href="#leaf">LEAF</a>
+            <a class="nav-link" href="#about">ABOUT US</a>
+        </div>
     </div>
+    
+    <div class="content-container">
+        <div id="image-container">
+            <p id="upload-text">Upload an image file</p>
+            <img id="upload-image" src="static/images/upload.png" alt="Upload Image">
+            <input type="file" id="image-input" accept="image/*" style="display: none;">
+            <span id="close-icon" style="display: none;">&times;</span>
+        </div>
+        <div id="prediction-result"></div>
+        <div id="about-us" style="display: none;">
+          <h3>About Us</h3>
+            <p>Welcome to our Coffee Leaf Disease Classification project, "Barako - BAMA (Brewed Analysis for Monitoring Ailment)". 
+              We are a group of 3rd-year BS Computer Science students from FAITH Colleges. </p>
 
+            <p>Our project utilizes deep learning techniques with the ResNet50 model architecture to accurately classify various coffee leaf diseases. 
+              To ensure ease of access and usability, we have implemented our solution using the Flask framework, 
+              providing a user-friendly interface for every users.</p>
+
+              <div id="about-logo">
+                <img src="static/images/boys logo.png" alt="logo">
+              </div>
+        </div>
+        <div id="leaf-classification" style="display: none;">
+          <h2>LEAF CLASSIFICATION</h2>
+          <div class="leaf-type">
+            <img src="static/images/leaf/healthy.jpg" alt="Healthy">
+            <div class="leaf-details">
+              <h3>Healthy</h3>
+              <p>A healthy coffee leaf.</p>
+            </div>
+          </div>
+          <div class="leaf-type">
+            <img src="static/images/leaf/leaf rust.JPG" alt="Leaf Rust">
+            <div class="leaf-details">
+              <h3>Leaf Rust</h3>
+              <p>
+                <b>Circular <font color = "orange">orange-brown</font> lesions.</b> Leaf rust, also known as brown rust (Puccinia triticina Eriks.) 
+                is a major disease of durum wheat throughout the world. 
+                It is the most prevalent of all the wheat rust diseases, 
+                occurring in nearly all areas where wheat is grown. 
+                Leaf rust development is favored by moist and warm growing conditions.</p>
+
+              <p><b>Solution: </b>Regularly spray copper-based fungicides.</p>
+            </div>
+          </div>
+          <div class="leaf-type">
+            <img src="static/images/leaf/lichens.JPG" alt="Lichens">
+            <div class="leaf-details">
+              <h3>Lichens</h3>
+              <p><b><font color="#97E0BA">Green-gray/white</font> patches on leaves.</b> A lichen consists of a simple photosynthesizing organism, usually a green alga or cyanobacterium, 
+                surrounded by filaments of a fungus. Generally, most of a lichen's bulk is made of interwoven fungal filaments, 
+                but this is reversed in filamentous and gelatinous lichens. The fungus is called a mycobiont.</p>
+
+                <p><b>Solution: </b>Regularly apply fungicides and improve air circulation.</p>
+            </div>
+          </div>
+          <div class="leaf-type">
+            <img src="static/images/leaf/sooty mold.JPG" alt="Sooty Mold">
+            <div class="leaf-details">
+              <h3>Sooty Mold</h3>
+              <p><b>Black, powdery fungal coating.</b> Sooty mould is a fungus that feeds on the honeydew, covering the leaves and stems in a black sticky substance. 
+                It does not feed directly on the plant's foliage; however, it covers the plant's leaf surface, blocking light 
+                and reducing photosynthesis, essential for plant growth.</p>
+
+                <p><b>Solution: </b>Regular cleaning and control insect pests.</p>
+            </div>
+          </div>
+          <div class="leaf-type">
+            <img src="static/images/leaf/wilt.jpg" alt="Wilted Leaf">
+            <div class="leaf-details">
+              <h3>Wilted Leaf</h3>
+              <p><b>Wilted, limp, <font color = #F59901>yellowed foliage</font>.</b> <i>Abiotic factor. </i>Plants wilt when roots are unable to supply sufficient moisture to the stems and leaves. 
+                Wilting for short periods of time does not harm plants. 
+                Sometimes a plant wilts on a hot day because moisture is evaporating from the leaves faster than the roots can take it up.</p>
+
+                <p><b>Solution: </b>Ensure proper watering and maintain soil health.</p>
+            </div>
+          </div>
+        </div>
+    </div>
+    
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="{{ url_for('static', filename='script.js') }}"></script>
 </body>
 </html>
-

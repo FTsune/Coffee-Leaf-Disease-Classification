@@ -4,6 +4,7 @@ import torch
 import torch.nn as nn
 import torchvision.models as models
 import torchvision.transforms as transforms
+import heapq
 from PIL import Image
 
 app = Flask(__name__)
@@ -11,57 +12,59 @@ app = Flask(__name__)
 # Load the pre-trained ResNet50 model
 model = models.resnet50(pretrained=True)
 num_ftrs = model.fc.in_features
-model.fc = torch.nn.Linear(num_ftrs, 6)  # Assuming 6 output classes
-model.load_state_dict(torch.load('models/new_model.pth', map_location=torch.device('cpu')))
+
+# Define class mapping
+class_mapping = {
+    0: 'Cercospora',
+    1: 'Excessive Sunlight',
+    2: 'Leaf Rust',
+    3: 'Lichens',
+    4: 'No Disease',
+    5: 'Sooty Mold',
+    6: 'Wilt'
+}
+
+num_classes = len(class_mapping)
+model.fc = nn.Linear(num_ftrs, num_classes)
+model.load_state_dict(torch.load('models/model.pth', map_location=torch.device('cpu')))
 model.eval()
 
-#Image preprocessing
+# Image preprocessing
 def preprocess_img(image):
     preprocess = transforms.Compose([
-        transforms.Resize(256),
-        transforms.CenterCrop(224),
+        transforms.Resize(size=(512, 512)),
+        transforms.CenterCrop(448),
         transforms.ToTensor(),
-        transforms.Normalize(
-            mean=[0.485, 0.456, 0.406],
-            std=[0.229, 0.224, 0.225],
-        )
+        transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225])
     ])
-
     image = preprocess(image).unsqueeze(0)
     return image
 
-class_mapping = {
-    0: 'Cercospora',
-    1: 'Coffee Wilt',
-    2: 'Healthy',
-    3: 'Leaf Rust',
-    4: 'Yellow Leaf Disease',
-    5: 'Green Algae'
-}
+# Define prediction function with confidence levels
+def predict_image(image_tensor, model, class_mapping, threshold=0.5, topk=3):
+    with torch.no_grad():
+        output = model(image_tensor)
+        probabilities = torch.sigmoid(output).cpu().numpy().flatten()
+
+    confidence_levels = {class_mapping[i]: float(probabilities[i]) for i in range(len(class_mapping))}
+
+    # Get the top 3 predictions based on confidence levels
+    top_predictions = heapq.nlargest(topk, confidence_levels, key=confidence_levels.get)
+    top_confidences = {cls: confidence_levels[cls] for cls in top_predictions}
+
+    return top_predictions, top_confidences
 
 @app.route('/')
 def index():
     return render_template('index.html')
 
-# Define prediction function
-def predict(image):
-    # Preprocess the input image
-    image_tensor = preprocess_img(image)
-    
-    # Perform inference using the loaded model
-    with torch.no_grad():
-        output = model(image_tensor)
-        _, predicted = torch.max(output, 1)
-        predicted_disease = class_mapping[predicted]
-        return predicted_disease.item()  
-    
-# Define route for image upload and prediction
 @app.route('/predict', methods=['POST'])
 def predict():
     if 'file' not in request.files:
         return jsonify({'error': 'No file provided'})
 
     file = request.files['file']
+
     if file.filename == '':
         return jsonify({'error': 'Empty filename'})
 
@@ -71,19 +74,13 @@ def predict():
         image_tensor = preprocess_img(image)
 
         # Perform prediction
-        with torch.no_grad():
-            output = model(image_tensor)
-            _, predicted = torch.max(output, 1)
-            predicted_class = predicted.item()  # Get the predicted class index
-            
-            # Map the predicted class to the corresponding disease label
-            predicted_disease = class_mapping.get(predicted_class, 'Unknown')
-            
+        predicted_diseases, confidence_levels = predict_image(image_tensor, model, class_mapping, threshold=0.5)
+
         # Return prediction result
-        return jsonify({'prediction': predicted_disease})
+        return jsonify({'prediction': predicted_diseases, 'confidences': confidence_levels})
 
     except Exception as e:
         return jsonify({'error': str(e)})
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, host='0.0.0.0')
