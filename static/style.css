@@ -14,9 +14,10 @@ img[src*='images/logo.png'] {
   }
 
 .navbar {
-    background-color: transparent;
+    background-color: #f7dec9;
     overflow: hidden;
-    border-radius: 5px;
+    border-radius: 25px;
+    border: 2px solid #0c8227;
     margin-top: 20px;
     margin-bottom: 20px;
     position: relative;
@@ -25,7 +26,7 @@ img[src*='images/logo.png'] {
 .navbar a {
     float: left;
     display: block;
-    color: #3cba54;
+    color: #128928;
     text-align: center;
     padding: 14px 70px;
     font-weight: bold;
