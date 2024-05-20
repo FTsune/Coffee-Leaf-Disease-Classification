@@ -1,194 +1,194 @@
 body {
-    font-family: Arial, sans-serif;
-    text-align: center;
-    color: #0c8227;
-    background-color: #F0EDE4; /* Set a light background color */
+  font-family: Arial, sans-serif;
+  text-align: center;
+  color: #0c8227;
+  background-color: #F0EDE4; /* Set a light background color */
 }
 
 img[src*='images/logo.png'] {
-    max-width: 200px; /* Adjust the maximum width as needed */
-    height: auto; 
-    float: inline-end;
-    position: relative;
-    margin-top: -25px;
-  }
+  max-width: 200px; /* Adjust the maximum width as needed */
+  height: auto; 
+  float: inline-end;
+  position: relative;
+  margin-top: -25px;
+}
 
 .navbar {
-    background-color: #f7dec9;
-    overflow: hidden;
-    border-radius: 25px;
-    border: 2px solid #643524;
-    margin-top: 20px;
-    margin-bottom: 20px;
-    position: relative;
+  background-color: #f7dec9;
+  overflow: hidden;
+  border-radius: 25px;
+  border: 2px solid #643524;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  position: relative;
 }
 
 .navbar a {
-    float: left;
-    display: block;
-    color: #723d2a;
-    text-align: center;
-    padding: 14px 70px;
-    font-weight: bold;
-    text-decoration: none;
-    position: relative;
+  float: left;
+  display: block;
+  color: #723d2a;
+  text-align: center;
+  padding: 14px 70px;
+  font-weight: bold;
+  text-decoration: none;
+  position: relative;
 }
 
 /* .navbar a::after {
-    content: '';
-    display: block;
-    width: 100vw;
-    height: 2px;
-    background-color: #3cba54;
-    position: absolute;
-    bottom: 0;
-    left: 0;
+  content: '';
+  display: block;
+  width: 100vw;
+  height: 2px;
+  background-color: #3cba54;
+  position: absolute;
+  bottom: 0;
+  left: 0;
 } */
 
 .navbar a:not(:last-child)::before {
-    content: '';
-    display: block;
-    background-color: #BC5C3A;
-    position: absolute;
-    right: 0;
-    top: 10px;
+  content: '';
+  display: block;
+  background-color: #BC5C3A;
+  position: absolute;
+  right: 0;
+  top: 10px;
 }
 
 .navbar a:hover {
-    background-color: rgba(60, 186, 84, 0.1);
-    color: #BC5C3A;
+  background-color: rgba(60, 186, 84, 0.1);
+  color: #BC5C3A;
 }
 
 .active {
-    background-color: rgba(38, 159, 66, 0.1);
-    color: #5e4821;
-    border-radius: 25px;
+  background-color: rgba(38, 159, 66, 0.1);
+  color: #5e4821;
+  border-radius: 25px;
 }
 
 .content-container {
-    max-width: 700px; 
-    margin: 0 auto; 
-    background-color: #f6f5f5;
-    padding: 20px;
-    border: 3px solid #643524;
-    border-radius: 5px;
+  max-width: 700px; 
+  margin: 0 auto; 
+  background-color: #f6f5f5;
+  padding: 20px;
+  border: 3px solid #643524;
+  border-radius: 5px;
 }
 
 #image-container {
-    width: 250px;
-    height: 250px;
-    margin: auto;
-    text-align: center; 
-    cursor: pointer;
-    position: relative;
-    overflow: hidden;
+  width: 250px;
+  height: 250px;
+  margin: auto;
+  text-align: center; 
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
 }
 
 #image-container p {
-    font-size: 13px;
-    margin-bottom: 10px;
-    color: #723d2a;
+  font-size: 13px;
+  margin-bottom: 10px;
+  color: #723d2a;
 }
 
 #image-container img {
-    max-width: 75%;
-    max-height: 75%;
-    border: 3px solid #643524;
-    border-radius: 25px;
-    box-sizing: border-box;
-    object-fit: contain;
-}
-
-#close-icon {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    margin-right: 200px;
-    margin-bottom: 5px;
-    font-size: 20px;
-    cursor: pointer;
-    color: rgb(20, 20, 20);
-    display: none;
+  max-width: 200px;
+  max-height: 200px;
+  border: 3px solid #643524;
+  border-radius: 25px;
+  box-sizing: border-box;
+  object-fit: cover;
 }
 
 /* #close-icon {
-    position: absolute;
-    top: 10px;
-    right: 5px;
-    margin-right: 5px;
-    margin-bottom: 5px;
-    font-size: 20px;
-    cursor: pointer;
-    color: rgb(20, 20, 20);
-    display: none;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  margin-right: 200px;
+  margin-bottom: 5px;
+  font-size: 20px;
+  cursor: pointer;
+  color: rgb(20, 20, 20);
+  display: none;
 } */
 
-#leaf-classification {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-  }
-  
-  .leaf-type {
-    border: 2px solid #723d2a;
-    border-radius: 5px;
-    padding: 20px;
-    display: flex;
-    align-items: flex-start;
-    margin-bottom: 20px;
-    margin-top: 40px;
-  }
-  
-  .leaf-type img {
-    max-width: 130px;
-    border: 3px solid #0c8227;
-    border-radius: 25px;
-    margin-right: 20px;
-    margin-bottom: 20px;
-  }
-  
-  .leaf-details {
-    flex-grow: 1;
-  }
-  
-  .leaf-details h3 {
-    text-align: left;
-    margin-top: 0;
-    margin-bottom: 10px;
-  }
-  
-  .leaf-details p {
-    font-size: 13px;
-    text-align: justify;
-    margin-top: 0;
-    margin-right: 10px;
-    color: #333; /* Adjust text color as needed */
-  }
-  
-  #about-us h4{
-    margin-top: 100px;
-  }
-  #about-logo {
-    text-align: center;
-    margin-top: 20px;
-  }
-  
-  #about-logo img {
-    max-width: 30%;
-    height: auto;
-  }
+#close-icon {
+  position: absolute;
+  top: 10px;
+  right: 5px;
+  margin-right: 5px;
+  margin-bottom: 5px;
+  font-size: 20px;
+  cursor: pointer;
+  color: rgb(20, 20, 20);
+  display: none;
+}
 
-  #about-us {
-    color: #723d2a;
-  }
-  
-  .group-member img {
-    border: 1px solid #643524;
-    border-radius: 5px;
-    max-width: 100px;
-    padding: 15px;
-    height: auto;
-  }
+#leaf-classification {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.leaf-type {
+  border: 2px solid #723d2a;
+  border-radius: 5px;
+  padding: 20px;
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 20px;
+  margin-top: 40px;
+}
+
+.leaf-type img {
+  max-width: 130px;
+  border: 3px solid #0c8227;
+  border-radius: 25px;
+  margin-right: 20px;
+  margin-bottom: 20px;
+}
+
+.leaf-details {
+  flex-grow: 1;
+}
+
+.leaf-details h3 {
+  text-align: left;
+  margin-top: 0;
+  margin-bottom: 10px;
+}
+
+.leaf-details p {
+  font-size: 13px;
+  text-align: justify;
+  margin-top: 0;
+  margin-right: 10px;
+  color: #333; /* Adjust text color as needed */
+}
+
+#about-us h4{
+  margin-top: 100px;
+}
+#about-logo {
+  text-align: center;
+  margin-top: 20px;
+}
+
+#about-logo img {
+  max-width: 30%;
+  height: auto;
+}
+
+#about-us {
+  color: #723d2a;
+}
+
+.group-member img {
+  /* border: 1px solid #643524;
+  border-radius: 5px; */
+  max-width: 100px;
+  padding: 15px;
+  height: auto;
+}
 #prediction-result {
-    color: #000;
+  color: #000;
 }
