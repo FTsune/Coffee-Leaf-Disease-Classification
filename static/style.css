@@ -17,7 +17,7 @@ img[src*='images/logo.png'] {
     background-color: #f7dec9;
     overflow: hidden;
     border-radius: 25px;
-    border: 2px solid #BC5C3A;
+    border: 2px solid #643524;
     margin-top: 20px;
     margin-bottom: 20px;
     position: relative;
@@ -70,7 +70,7 @@ img[src*='images/logo.png'] {
     margin: 0 auto; 
     background-color: #f6f5f5;
     padding: 20px;
-    border: 3px solid #BC5C3A;
+    border: 3px solid #643524;
     border-radius: 5px;
 }
 
@@ -93,7 +93,7 @@ img[src*='images/logo.png'] {
 #image-container img {
     max-width: 75%;
     max-height: 75%;
-    border: 3px solid #3cba54;
+    border: 3px solid #643524;
     border-radius: 25px;
     box-sizing: border-box;
     object-fit: contain;
@@ -118,6 +118,9 @@ img[src*='images/logo.png'] {
   }
   
   .leaf-type {
+    border: 2px solid #723d2a;
+    border-radius: 5px;
+    padding: 20px;
     display: flex;
     align-items: flex-start;
     margin-bottom: 20px;
@@ -150,6 +153,9 @@ img[src*='images/logo.png'] {
     color: #333; /* Adjust text color as needed */
   }
   
+  #about-us h4{
+    margin-top: 100px;
+  }
   #about-logo {
     text-align: center;
     margin-top: 20px;
@@ -164,7 +170,13 @@ img[src*='images/logo.png'] {
     color: #723d2a;
   }
   
+  .group-member img {
+    border: 1px solid #643524;
+    border-radius: 5px;
+    max-width: 100px;
+    padding: 15px;
+    height: auto;
+  }
 #prediction-result {
     color: #000;
 }
-
