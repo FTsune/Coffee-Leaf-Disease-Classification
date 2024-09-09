@@ -27,37 +27,33 @@ class_mapping = {
 
 num_classes = len(class_mapping)
 model.fc = nn.Linear(num_ftrs, num_classes)
-
-# Load the model weights
-model_path = 'models/model-ResNet50.pth'
-if os.path.exists(model_path):
-    model.load_state_dict(torch.load(model_path, map_location=torch.device('cpu')))
-else:
-    raise FileNotFoundError(f"Model file not found at {model_path}")
-
+model.load_state_dict(torch.load('models/model-ResNet50.pth', map_location=torch.device('cpu')))
 model.eval()
 
 def pad_image(image):
     width, height = image.size
     max_dim = max(width, height)
+
     
     background_color = tuple(np.random.randint(0, 256, size=3))
     background = Image.new('RGB', (max_dim, max_dim), background_color)
+
     pos = ((max_dim - width) // 2, (max_dim - height) // 2)
     background.paste(image, pos)
+
     return background
 
 def sobel_edge_detection(image):
     image = np.array(image)
     channels = []
-    for i in range(3):
+    for i in range(3):  
         gray = image[:, :, i]
         sobelx = cv2.Sobel(gray, cv2.CV_64F, 1, 0, ksize=3)
         sobely = cv2.Sobel(gray, cv2.CV_64F, 0, 1, ksize=3)
         sobel = np.sqrt(sobelx**2 + sobely**2)
         sobel = np.uint8(sobel)
         channels.append(sobel)
-    sobel = np.stack(channels, axis=-1)
+    sobel = np.stack(channels, axis=-1) 
     return Image.fromarray(sobel)
 
 class SobelEdgeDetection(object):
@@ -67,14 +63,15 @@ class SobelEdgeDetection(object):
 # Image preprocessing
 def preprocess_img(image):
     preprocess = transforms.Compose([
-        transforms.Lambda(pad_image),
-        transforms.Resize(size=(512, 512)),
-        transforms.CenterCrop(448),
-        SobelEdgeDetection(),
-        transforms.RandomHorizontalFlip(),
-        transforms.RandomRotation(10),
-        transforms.ToTensor(),
-        transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225])
+    transforms.Lambda(pad_image), 
+    transforms.Resize(size=(512, 512)),
+    transforms.CenterCrop(448),
+    SobelEdgeDetection(),    
+    transforms.RandomHorizontalFlip(),
+    transforms.RandomRotation(10),
+#     transforms.ColorJitter(brightness=0.1, contrast=0.2, saturation=0.2, hue=0.1), 
+    transforms.ToTensor(),
+    transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225])
     ])
     image = preprocess(image).unsqueeze(0)
     return image
@@ -122,4 +119,4 @@ def predict():
         return jsonify({'error': str(e)})
 
 if __name__ == '__main__':
-    app.run(debug=False, host='0.0.0.0')
+    app.run(debug=True, host='0.0.0.0')
